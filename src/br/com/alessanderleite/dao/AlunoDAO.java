@@ -26,7 +26,11 @@ public class AlunoDAO {
 			stmt.execute();
 			stmt.close();
 			
+			System.out.println("O aluno " + aluno.getNome() + " foi gravado no Banco de Dados");
+			conn.close();
+			
 		} catch (SQLException e) {
+			System.err.println("Erro na comunicação com o banco de dados!");
 			e.printStackTrace();
 		}
 	}
