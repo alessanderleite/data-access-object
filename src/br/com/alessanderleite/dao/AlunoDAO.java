@@ -9,30 +9,31 @@ import br.com.alessanderleite.model.Aluno;
 
 public class AlunoDAO {
 	
-	public void create(Aluno aluno) {
+	public int registerAluno(Aluno aluno) {
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection conn = connectionFactory.createConnection();
+		
+		String sql = "INSERT INTO aluno (id, nome, instituicao) values(?, ?, ?);";
+		int result = 0;
 		
 		try {
-			ConnectionFactory connectionFactory = new ConnectionFactory();
-			Connection conn = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
 			
-			String sql = "INSERT INTO aluno (id, nom, inst, gen) values(?, ?, ?, ?)";
-			PreparedStatement stmt = conn.prepareStatement(sql);
+			preparedStatement.setLong(1, aluno.getId());
+			preparedStatement.setString(2, aluno.getNome());
+			preparedStatement.setString(3, aluno.getInstituicao());
 			
-			stmt.setLong(1, aluno.getMatricula());
-			stmt.setString(2, aluno.getNome());
-			stmt.setString(3, aluno.getInstituicao());
-			stmt.setBoolean(4, aluno.getSexo());
+			System.out.println(preparedStatement);
 			
-			stmt.execute();
-			stmt.close();
-			
-			System.out.println("O aluno " + aluno.getNome() + " foi gravado no Banco de Dados");
+			result = preparedStatement.executeUpdate();
+			preparedStatement.close();
 			conn.close();
 			
 		} catch (SQLException e) {
 			System.err.println("Erro na comunicação com o banco de dados!");
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
-
 }

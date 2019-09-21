@@ -1,23 +1,23 @@
 package br.com.alessanderleite.model;
 
-public class Aluno {
+import java.io.Serializable;
 
-	private long matricula;
+public class Aluno implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private long id;
 	private String nome;
 	private String instituicao;
-	private boolean sexo;
-	
-	public static final boolean MASCULINO = false;
-	public static final boolean FEMININO = true;
 	
 	public Aluno() {}
 
-	public long getMatricula() {
-		return matricula;
+	public long getId() {
+		return id;
 	}
 
-	public void setMatricula(long matricula) {
-		this.matricula = matricula;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -34,21 +34,5 @@ public class Aluno {
 
 	public void setInstituicao(String instituicao) {
 		this.instituicao = instituicao;
-	}
-
-	public boolean getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(boolean sexo) {
-		this.sexo = sexo;
-	}
-
-	public static boolean isMasculino() {
-		return MASCULINO;
-	}
-
-	public static boolean isFeminino() {
-		return FEMININO;
 	}
 }
