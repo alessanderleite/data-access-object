@@ -6,17 +6,18 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-	public String driver = "com.mysql.jdbc.Driver";
-	public String url = "jdbc:mysql://localhost:3306/db_dao?useSSL=false";
-	public String user = "root";
-	public String password = "root";
+	public static final String DRIVER = "com.mysql.jdbc.Driver";
+	public static final String URL = "jdbc:mysql://localhost:3306/db_dao?useSSL=false";
+	public static final String USER = "root";
+	public static final String PASSWORD = "root";
 	
 	public ConnectionFactory() {}
 	
 	public Connection createConnection() {
+		Connection connection;
 		try {
-			Class.forName(driver);
-			Connection connection = DriverManager.getConnection(url, user, password);
+			Class.forName(DRIVER);
+			connection = DriverManager.getConnection(URL, USER, PASSWORD);
 			return connection;
 			
 		} catch (SQLException | ClassNotFoundException e) {
